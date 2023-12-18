@@ -1,9 +1,7 @@
 {% load static %}
 {% load bootstrap5 %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>RecipesApp Home</title>
@@ -36,7 +34,7 @@
       z-index: -1;
     }
   
-    .login-container {
+    .logout-container {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -61,26 +59,14 @@
       font-size: 24px;
       margin-left: -5px;
     }
-  
-    .myrecipetext {
-      font-family: 'Sigmar', sans-serif;
-      font-size: 40px;
-      margin-bottom: 0;
-      color: #FFFF00;
-    }
-  
-    .text-font {
-      font-family: 'Pacifico', cursive;
-      color: #FFFFFF;
-    }
-  
+   
     .my-login-button {
       background-color: #029d02;
       border-color: #029d02;
       color: #FFFFFF;
       padding: 14px 28px;
       border-radius: 5px;
-      font-size: 22px;
+      font-size: 25px;
       text-decoration: none;
       font-family: 'Pacifico', cursive;
       transition: background-color 0.3s ease;
@@ -98,6 +84,13 @@
       text-align: center;
       margin-top: 20px;
     }
+
+    .logout-message {
+      font-family: 'Pacifico', cursive;
+      font-size: 35px;
+      color: #FFFF00;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -106,13 +99,12 @@
     <img src="{% static 'recipes/images/favicon-32x32.png' %}" alt="Logo">
     <span class="logo-text">MyRecipes</span>
   </div>
-  <div class="container login-container">
-    <h1><span class="text-font">Welcome to</span> <span class="myrecipetext">MyRecipesApp</span></h1>
-    <a href="{% url 'login' %}" class="my-login-button">Login</a>
+  <div class="container logout-container">
+    <h3><span class="logout-message">You have been successfully logged out. Thank you for using our recipe app!</h3></span>
+    <a href="{% url 'login' %}" class="my-login-button">Login again</a>
     <div class="slogan">
-      <h3 style="color: #FF0000; font-size: 30px; font-family: 'Pacifico', cursive;">Find Happiness In Cooking</h3>
+      <h3 style="color: #FF0000; font-size: 40px; font-family: 'Pacifico', cursive;">Find Happiness In Cooking</h3>
     </div>
   </div>
 </body>
-
 </html>

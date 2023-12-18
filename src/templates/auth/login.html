@@ -56,50 +56,53 @@
     }
   
     .logo-text {
-      color: #FFFF00;
+      color: #ffff00;
       font-family: 'Sigmar', sans-serif;
       font-size: 24px;
       margin-left: -5px;
     }
   
-    .myrecipetext {
+    .myreciptext {
       font-family: 'Sigmar', sans-serif;
       font-size: 40px;
       margin-bottom: 0;
-      color: #FFFF00;
+      color: #ffff00;
     }
   
     .text-font {
       font-family: 'Pacifico', cursive;
-      color: #FFFFFF;
+      color: #ffffff;
     }
   
     .my-login-button {
       background-color: #029d02;
       border-color: #029d02;
-      color: #FFFFFF;
-      padding: 14px 28px;
-      border-radius: 5px;
-      font-size: 22px;
-      text-decoration: none;
-      font-family: 'Pacifico', cursive;
-      transition: background-color 0.3s ease;
-      margin-top: 20px;
+      color: #ffffff;
     }
   
     .my-login-button:hover {
-      background-color: #FFFF00;
-      border-color: #FFFF00;
-      color: #FF0000;
+      background-color: #ffff00;
+      border-color: #ffff00;
+      color: #ff0000;
     }
   
+    .form-group label {
+      color: #ffffff;
+    }
+  
+    .form-control {
+      background-color: rgba(255, 255, 255, 0.4); /* Adjust the transparency as needed */
+      color: #333333;
+    }
+    
     .slogan {
-      color: #FF0000;
+      color: #ff0000;
       text-align: center;
       margin-top: 20px;
     }
   </style>
 </head>
+
 <body>
   <div class="overlay"></div>
   <div class="logo">
@@ -107,10 +110,23 @@
     <span class="logo-text">MyRecipes</span>
   </div>
   <div class="container login-container">
-    <h1><span class="text-font">Welcome to</span> <span class="myrecipetext">MyRecipesApp</span></h1>
-    <a href="{% url 'login' %}" class="my-login-button">Login</a>
+    <h1><span class="text-font">Welcome to</span> <span class="myreciptext">MyRecipesApp</span></h1>
+    <form method="post">
+      {% comment %} add Django security token {% endcomment %}
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary my-login-button">Login</button>
+      
+    </form>
     <div class="slogan">
-      <h3 style="color: #FF0000; font-size: 30px; font-family: 'Pacifico', cursive;">Find Happiness In Cooking</h3>
+      <h3 style="color: #ff0000; font-size: 30px; font-family: 'Pacifico', cursive;">Find Happiness In Cooking</h3>
     </div>
   </div>
 </body>
