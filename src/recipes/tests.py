@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import Recipe
+from .forms import RecipesSearchForm
 # Create your tests here.
 
 class RecipeModelTest(TestCase):
@@ -43,3 +44,23 @@ class RecipeModelTest(TestCase):
         recipe.ingredients = 'Ingredient 1, Ingredient 2, Ingredient 3, Ingredient 4, Ingredient 5, Ingredient 6, Ingredient 7'
         expected_difficulty = 'Hard'
         self.assertEqual(recipe.calculate_difficulty(), expected_difficulty)
+
+class RecipeFormTest(TestCase):
+    def test_recipe_form_valid_data(self):
+        form_data = {
+            'recipe_name': 'Test Recipe',
+            'ingredients': 'Ingredient 1, Ingredient 2, Ingredient 3',
+            'chart_type': '#1'
+        }
+        form = RecipesSearchForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_recipe_form_invalid_data(self):
+        form_data = {
+            'recipe_name': 'Test Recipe' * 100,  # Exceeds max length
+            'ingredients': 'Ingredient 1, Ingredient 2, Ingredient 3' * 100,  # Exceeds max length
+            'chart_type': '#4'  # Invalid choice
+        }
+        form = RecipesSearchForm(data=form_data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(len(form.errors), 3)  # Three fields should have errors
