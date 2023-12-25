@@ -18,26 +18,38 @@
     <span class="logo-text">MyRecipes</span>
   </div>
   <a href="{% url 'recipes:list' %}" class="back-btn">Back</a>
-  <a href ="{%url 'logout' %}" class="logout"> Logout </a>
+  <a href="{% url 'logout' %}" class="logout">Logout</a>
 
   <div class="search_results">
     <h1>Search for recipes</h1>
 
     <form action="" method="POST">
       {% csrf_token %}
-      {{form}}
+      {{ form }}
       <button type="submit">Search</button>
     </form>
 
     <br>
-    {% if recipe_df %}
-    {{recipe_df|safe}}
+    {% if qs %}
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Ingredients</th>
+        <th>Cooking Time (minutes)</th>
+      </tr>
+      {% for recipe in qs %}
+      <tr>
+        <td><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></td>
+        <td>{{ recipe.ingredients }}</td>
+        <td>{{ recipe.cooking_time }}</td>
+      </tr>
+      {% endfor %}
+    </table>
     <br>
-    <img src="data:image/png;base64, {{chart|safe}}">
+    <img src="data:image/png;base64, {{ chart|safe }}">
     {% else %}
     <h3>No data, try again.</h3>
     {% endif %}
-
   </div>
 </body>
 

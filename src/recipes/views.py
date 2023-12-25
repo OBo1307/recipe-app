@@ -1,18 +1,18 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView     # to display list of objects and details of a single object
-from django.contrib.auth.mixins import LoginRequiredMixin # to restrict access to views
-from .models import Recipe                                # to access the Recipe model
-from .forms import RecipesSearchForm                      # to access the RecipesSearchForm form
+from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from .models import Recipe
+from .forms import RecipesSearchForm
 import pandas as pd
 from .utils import get_chart, get_recipename_from_id
 from django.db.models import Q
 
-# Create your views here.
-class RecipeListView(LoginRequiredMixin, ListView):       # class-based 'protected' view
+class RecipeListView(LoginRequiredMixin, ListView):
     model = Recipe
     template_name = 'recipes/main.html'
 
-class RecipeDetailView(LoginRequiredMixin, DetailView):   # class-based 'protected' view
+class RecipeDetailView(LoginRequiredMixin, DetailView):
     model = Recipe
     template_name = 'recipes/detail.html'
 
@@ -46,7 +46,7 @@ def records(request):
             recipe_df = pd.DataFrame(qs.values('id', 'name', 'cooking_time', 'ingredients'))
             chart = get_chart(chart_type, recipe_df, labels=recipe_df['name'].values)
             recipe_df = recipe_df.to_html()
-    
+
     context = {
         'form': form,
         'recipe_df': recipe_df,
