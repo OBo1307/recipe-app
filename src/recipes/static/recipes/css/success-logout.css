@@ -79,3 +79,33 @@ body {
   color: #ffff00;
   margin-bottom: 20px;
 }
+
+.page-footer {
+  font-family: "Pacifico", cursive;
+  font-size: 30px;
+  color: #ffff00;
+  text-align: center;
+  padding: 20px 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.page-footer__item {
+  margin-bottom: 10px;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.social-media a {
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+.social-media a:hover {
+  transform: scale(1.2);
+}

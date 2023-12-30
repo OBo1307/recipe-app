@@ -17,7 +17,9 @@
     <div class="logo">
       <img src="{% static 'recipes/images/favicon-32x32.png' %}" alt="Logo">
       <span class="logo-text">MyRecipes</span>
+      <a class="add" href="{%url 'recipes:add' %}">AddRecipe</a>
     </div>
+
     <a class="search" href="{%url 'recipes:search' %}">Search</a>
     <a href ="{%url 'logout' %}" class="logout"> Logout </a>
     <h1>MyRecipes</h1>

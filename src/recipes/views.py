@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Recipe
-from .forms import RecipesSearchForm
+from .forms import RecipesSearchForm, AddRecipeForm
 import pandas as pd
 from .utils import get_chart, get_recipename_from_id
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 class RecipeListView(LoginRequiredMixin, ListView):
     model = Recipe
@@ -55,3 +56,25 @@ def records(request):
     }
 
     return render(request, 'recipes/search.html', context)
+
+@login_required
+def add_recipe(request):
+    add_form = AddRecipeForm(request.POST, request.FILES)
+
+    if request.method == 'POST':
+        if add_form.is_valid():
+            recipe = Recipe(
+                name=add_form.cleaned_data['name'],
+                cooking_time=add_form.cleaned_data['cooking_time'],
+                ingredients=add_form.cleaned_data['ingredients'],
+                description=add_form.cleaned_data['description'],
+                pic=add_form.cleaned_data['pic']
+            )
+            recipe.save()
+            return redirect('recipes:list')
+
+    context = {
+        'add_form': add_form,
+    }
+
+    return render(request, 'recipes/add_recipe.html', context)

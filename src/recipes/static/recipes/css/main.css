@@ -136,3 +136,19 @@ h1 {
   background-color: rgba(0, 0, 0, 0.5); /* Adjust the transparency as needed */
   z-index: -1; /* Move the overlay behind the recipe items */
 }
+
+.add {
+  color: #ffff00;
+  font-family: "Sigmar", sans-serif;
+  font-size: 24px;
+  text-decoration: none;
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  transition: font-size 0.3s;
+}
+
+.add:hover {
+  font-size: 28px;
+}
